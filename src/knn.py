@@ -23,6 +23,15 @@ class KNN:
         majority_class_name = self.get_majority_class_name(nearest_neighbours)
         return majority_class_name
 
+    def get_neighbours(self):
+        """It returns all the neighbours as tuples containing the class name and distance
+        of the target instance."""
+        neighbours = []
+        for class_name in self.data:
+            for instance in self.data[class_name]:
+                neighbours.append((class_name, self.get_distance(self.target, instance)))
+        return neighbours
+
     @staticmethod
     def get_majority_class_name(neighbours):
         """Given a list of neighbours as a tuple containing the class name and distance,
@@ -36,15 +45,6 @@ class KNN:
                 best_class_name = class_name
                 occurrences = x
         return best_class_name
-
-    def get_neighbours(self):
-        """It returns all the neighbours as tuples containing the class name and distance
-        of the target instance."""
-        neighbours = []
-        for class_name in self.data:
-            for instance in self.data[class_name]:
-                neighbours.append((class_name, self.get_distance(self.target, instance)))
-        return neighbours
 
     @staticmethod
     def get_distance(a, b):

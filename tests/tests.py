@@ -25,3 +25,17 @@ class Test(unittest.TestCase):
 
     def test_get_majority_class(self):
         self.assertEqual(self.knn.fit(), "top_left")
+
+    def test_get_distance(self):
+        point_a = (3.0, 4.0)
+        point_b = (6.0, 0.0)
+        self.assertEqual(self.knn.get_distance(point_a, point_b), 5.0)
+
+    def test_get_majority_class_name(self):
+        neighbours = [
+            ("blue", (1.0, 2.0)),
+            ("green", (1.0, 2.0)),
+            ("green", (1.0, 2.0)),
+            ("green", (1.0, 2.0)),
+        ]
+        self.assertEqual(self.knn.get_majority_class_name(neighbours), "green")
