@@ -17,6 +17,15 @@ class Test(unittest.TestCase):
         knn = my_knn.KNN(samples, target, k)
         self.knn = knn
 
+    def test_scale(self):
+        self.assertEqual(self.knn.samples[0][1], (0.0, 0.0))
+        self.assertEqual(self.knn.samples[1][1], (0.1, 0.0))
+        self.assertEqual(self.knn.samples[2][1], (0.1, 0.0625))
+        self.assertEqual(self.knn.samples[3][1], (0.9, 0.875))
+        self.assertEqual(self.knn.samples[4][1], (0.8, 0.75))
+        self.assertEqual(self.knn.samples[5][1], (1.0, 1.0))
+        self.assertEqual(self.knn.target, (0.15, 0.25))
+
     def test_classify(self):
         self.assertEqual(self.knn.classify(), "bottom_left")
 

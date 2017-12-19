@@ -14,6 +14,24 @@ class KNN:
         self.samples = samples
         self.target = target
         self.k = k
+        self.scale()
+
+    def scale(self):
+        self.samples.insert(0, ["target", self.target])
+        for i in range(0, len(self.samples[1])):
+            min = float("+Inf")
+            max = float("-Inf")
+            for sample in self.samples:
+                if sample[1][i] < min:
+                    min = sample[1][i]
+                elif sample[1][i] > max:
+                    max = sample[1][i]
+            for sample in self.samples:
+                a = list(sample[1])
+                a[i] = (a[i] - min) / (max - min)
+                sample[1] = tuple(a)
+        self.target = self.samples[0][1]
+        self.samples = self.samples[1:]
 
     def classify(self):
         """Returns the class which the target instance has been classified to."""
